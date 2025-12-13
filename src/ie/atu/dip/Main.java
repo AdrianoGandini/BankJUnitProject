@@ -18,7 +18,7 @@ public class Main {
 			manager.addAccount("Bob", 500);
 			
 			//Test deposits
-			System.out.println("Depositing 200 to Alice: " + transacion.deposit("Alice", 200)); // Should return true
+			System.out.println("Depositing 200 to Alice.Alice's balance: " + transacion.deposit("Alice", 200)); // Should return 1200
 		    System.out.println("Alice's balance: " + transacion.getBalance("Alice")); // Should be 1200
 		    
 		    // Test withdrawals

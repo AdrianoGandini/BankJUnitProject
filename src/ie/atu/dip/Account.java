@@ -29,16 +29,22 @@ public class Account {
 	}
 
 	// Method to deposit money into the account
-	public void deposit(double amount) {
+	public void deposit(double amount) throws InvalidAmountException {
+		if (amount <= 0) {
+			throw new InvalidAmountException("The amount is not valid");
+		}
 		balance += amount;
 	}
 
 	// Method to withdraw money from the account (only if balance is sufficient)
-	public boolean withdraw(double amount) {
-		if (amount > balance)
-			return false; // Insufficient funds
-		balance -= amount;
-		return true;
+	public void withdraw(double amount) throws InvalidAmountException {
+	    if (amount <= 0) {
+	        throw new InvalidAmountException("The amount is not valid");
+	    }
+	    if (amount > balance) {
+	        throw new InvalidAmountException("Insufficient funds");
+	    }
+	    balance -= amount;
 	}
 
 	// Method to approve a loan for the account

@@ -15,7 +15,7 @@ public interface TransactionService {
 	 * @return True if the deposit is successful, otherwise false.
 	 * @throws AccountNotFoundException if account is not found.
 	 */
-	boolean deposit(String accountHolder, double amount) throws AccountNotFoundException, InvalidAmountException, InvalidAccountException  ;
+	Double deposit(String accountHolder, double amount) throws AccountNotFoundException, InvalidAmountException, InvalidAccountException  ;
 	
 	
 	/**
@@ -26,7 +26,7 @@ public interface TransactionService {
 	 * @return True if the withdrawal is successful, otherwise false.
 	 * @throws AccountNotFoundException if account is not found.
 	 */
-	boolean withdraw(String accountHolder, double amount) throws AccountNotFoundException, InvalidAmountException, InvalidAccountException ;
+	Double withdraw(String accountHolder, double amount) throws AccountNotFoundException, InvalidAmountException, InvalidAccountException ;
 	
 	
 	/**

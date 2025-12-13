@@ -2,6 +2,7 @@ package ie.atu.dip;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class AccountRepositoryImplTest {
@@ -24,65 +25,72 @@ class AccountRepositoryImplTest {
 	}
 	
 	@Test
-	void testAddAccount_ZeroAmount_ShouldThrowException() {
-		
+	@DisplayName("Should throw exception for zero amount")
+	void testAddAccountZeroAmount() {
+
 		assertThrows(InvalidAmountException.class, () -> {
 			repository.addAccount(VALID_ACCOUNT_NAME, ZERO);
-		});		
+		});
 	}
 	
 	@Test
-	void testAddAccount_NegativeAmount_ShouldThrowException() {
-		
+	@DisplayName("Should throw exception for negative amount")
+	void testAddAccountNegativeAmount() {
+
 		assertThrows(InvalidAmountException.class, () -> {
 			repository.addAccount(VALID_ACCOUNT_NAME, NEGATIVE_ACCOUNT_VALUE);
-		});		
+		});
 	}
 	
 	@Test
-	void testAddAccount_EmptyName_ShouldThrowException() {
+	@DisplayName("Should throw exception for empty account name")
+	void testAddAccountEmptyName() {
 		assertThrows(InvalidAccountException.class, () -> {
 			repository.addAccount(EMPTY_ACCOUNT_NAME, VALID_ACCOUNT_VALUE);
 		});
 	}
 	
 	@Test
-	void testAddAccount_NullName_ShouldThrowException() {
+	@DisplayName("Should throw exception for null account name")
+	void testAddAccountNullName() {
 		assertThrows(InvalidAccountException.class, () -> {
 			repository.addAccount(NULL_NAME, VALID_ACCOUNT_VALUE);
 		});
 	}
 	
 	@Test
-	void testAddAccount_DuplicateAccount_ShouldThrowException() 
+	@DisplayName("Should throw exception for duplicate account")
+	void testAddAccountDuplicateAccount()
 			throws InvalidAccountException, AccountNotFoundException, InvalidAmountException {
-		
+
 		repository.addAccount(VALID_ACCOUNT_NAME, VALID_ACCOUNT_VALUE);
-		
+
 		assertThrows(InvalidAccountException.class, () -> {
 			repository.addAccount(VALID_ACCOUNT_NAME, VALID_ACCOUNT_VALUE);
 		});
 	}
 	
 	@Test
-	void testFindAccount_ExistingAccount_ShouldReturnAccount() 
+	@DisplayName("Should return account for existing account")
+	void testFindAccountExistingAccount()
 			throws InvalidAccountException, AccountNotFoundException, InvalidAmountException {
-		
+
 		repository.addAccount(VALID_ACCOUNT_NAME, VALID_ACCOUNT_VALUE);
-		
+
 		Account result = repository.findAccount(VALID_ACCOUNT_NAME);
-		
+
 		assertNotNull(result);
 		assertEquals(VALID_ACCOUNT_NAME, result.getAccountHolder());
-		assertEquals(VALID_ACCOUNT_VALUE, result.getBalance());		
+		assertEquals(VALID_ACCOUNT_VALUE, result.getBalance());
 	}
 	
 	@Test
-	void testFindAccount_NonExistentAccount_ShouldThrowException() 
+	@DisplayName("Should throw exception for non-existent account")
+	void testFindAccountNonExistentAccount()
 			throws InvalidAccountException, AccountNotFoundException, InvalidAmountException {
-		
+
 		repository.addAccount(VALID_ACCOUNT_NAME, VALID_ACCOUNT_VALUE);
-		
+
 		assertThrows(AccountNotFoundException.class, ()->{
 			repository.findAccount(INVALID_ACCOUNT_NAME);
 		});
@@ -90,33 +98,36 @@ class AccountRepositoryImplTest {
 	
 	
 	@Test
-	void testFindAccount_EmptyName_ShouldThrowException() {
+	@DisplayName("Should throw exception for empty name in find")
+	void testFindAccountEmptyName() {
 		assertThrows(InvalidAccountException.class, () -> {
 			repository.findAccount(EMPTY_ACCOUNT_NAME);
 		});
 	}
 	
 	@Test
-	void testFindAccount_NullName_ShouldThrowException() {
+	@DisplayName("Should throw exception for null name in find")
+	void testFindAccountNullName() {
 		assertThrows(InvalidAccountException.class, () -> {
 			repository.findAccount(NULL_NAME);
 		});
 	}
 	
 	@Test
-	void testAddAccount_BankDeposits_ShouldIncreaseDeposits() 
+	@DisplayName("Should increase bank deposits when adding account")
+	void testAddAccountBankDeposits()
 			throws InvalidAccountException, AccountNotFoundException, InvalidAmountException {
-		
+
 		double initialBankTotal = bank.getTotalDeposits();  // Should be 0
-	    
+
 	    repository.addAccount(VALID_ACCOUNT_NAME, VALID_ACCOUNT_VALUE);
-	    
+
 	    double expectedBankTotal = initialBankTotal + VALID_ACCOUNT_VALUE;
 	    double actualBankTotal = bank.getTotalDeposits();
-	    
+
 	    assertEquals(expectedBankTotal, actualBankTotal);
-		
-		 
+
+
 	}
 	
 }

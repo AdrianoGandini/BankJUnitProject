@@ -28,7 +28,7 @@ public class AccountRepositoryImpl implements AccountRepository {
 		throw new AccountNotFoundException(accountHolder);
 	}
 
-	// Add a not null name and initial deposit
+
 	@Override
 	public void addAccount(String accountHolder, double initialDeposit)
 			throws InvalidAccountException, InvalidAmountException {

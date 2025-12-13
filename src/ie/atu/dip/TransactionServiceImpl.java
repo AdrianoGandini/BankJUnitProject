@@ -3,41 +3,41 @@ package ie.atu.dip;
 public class TransactionServiceImpl implements TransactionService {
 
 
-	private AccountRepository manager;
+	private AccountRepository repository;
 	private Bank bank;
 
 	public TransactionServiceImpl(AccountRepository manager, Bank bank) {
-		this.manager = manager;
+		this.repository = manager;
 		this.bank = bank;
 
 	}
 
 	@Override
-	public boolean deposit(String accountHolder, double amount) throws AccountNotFoundException, InvalidAmountException, InvalidAccountException  {
-		Account account = manager.findAccount(accountHolder);
-		if (account == null || amount <= 0)
-			return false;
-		account.deposit(amount);
+	public Double deposit(String accountHolder, double amount) 
+			throws AccountNotFoundException, InvalidAmountException, InvalidAccountException  {
+		
+		Account account = repository.findAccount(accountHolder);
+		account.deposit(amount); 
 		bank.addToTotal(amount);
-		return true;
+		return account.getBalance();
 	}
 
 	@Override
-	public boolean withdraw(String accountHolder, double amount) throws AccountNotFoundException, InvalidAmountException, InvalidAccountException {
-		Account account = manager.findAccount(accountHolder) ;
-		if (account == null || amount <= 0)
-			return false;
-		if (account.withdraw(amount)) {
-			bank.subtractFromTotal(amount);
-			return true;
-		}
-		return false;
+	public Double withdraw(String accountHolder, double amount) 
+			throws AccountNotFoundException, InvalidAmountException, InvalidAccountException {
+		
+		Account account = repository.findAccount(accountHolder);
+		account.withdraw(amount);
+		bank.subtractFromTotal(amount);
+		return account.getBalance();
 	}
 
 	@Override
-	public Double getBalance(String accountHolder) throws AccountNotFoundException, InvalidAccountException {
-		Account account = manager.findAccount(accountHolder);
-		return account != null ? account.getBalance() : null;
+	public Double getBalance(String accountHolder) 
+			throws AccountNotFoundException, InvalidAccountException {
+		
+		Account account = repository.findAccount(accountHolder);
+		return  account.getBalance();
 	}
 
 }

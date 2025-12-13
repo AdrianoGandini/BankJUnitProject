@@ -2,6 +2,7 @@ package ie.atu.dip;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 
@@ -27,93 +28,102 @@ class BankImplTest {
 	}
 
 	@Test
-	void testGetTotalDeposits_InitialValue_ShouldBeZero() {
+	@DisplayName("Should have zero initial total deposits")
+	void testGetTotalDepositsInitialValue() {
 		assertEquals(ZERO, bank.getTotalDeposits());
 	}
 	
 	@Test
-	void testAddToTotal_AddPositiveAmount_ShouldIncreaseTotal() throws InvalidAmountException {
-		
+	@DisplayName("Should increase total when adding positive amount")
+	void testAddToTotalPositiveAmount() throws InvalidAmountException {
+
 		bank.addToTotal(INITIAL_DEPOSIT);
-		
+
 		double result = bank.getTotalDeposits();
 		double expected = INITIAL_DEPOSIT;
-		
+
 		assertEquals(expected, result);
-				
+
 	}
 	
 	@Test
-	void testAddToTotal_AddNegativeAmount_ShouldThrowException() throws InvalidAmountException {
+	@DisplayName("Should throw exception when adding negative amount")
+	void testAddToTotalNegativeAmount() throws InvalidAmountException {
 	    assertThrows(InvalidAmountException.class, () -> {
 	    	bank.addToTotal(NEGATIVE_AMOUNT);
 	    });
-		
+
 	}
 	
 	@Test
-	void testAddToTotal_AddZeroAmount_ShouldThrowException() throws InvalidAmountException {
+	@DisplayName("Should throw exception when adding zero amount")
+	void testAddToTotalZeroAmount() throws InvalidAmountException {
 		assertThrows(InvalidAmountException.class, () -> {
 	    	bank.addToTotal(ZERO);
 	    });
 	}
 	
 	@Test
-	void testSubtractFromTotal_SubtractAvailableAmount_ShouldDecreaseTotal() throws InvalidAmountException {
+	@DisplayName("Should decrease total when subtracting available amount")
+	void testSubtractFromTotalAvailableAmount() throws InvalidAmountException {
 		bank.addToTotal(INITIAL_DEPOSIT);
 
 		bank.subtractFromTotal(WITHDRAWAL_AMOUNT);
-		
+
 
 		double result = bank.getTotalDeposits();
 		double expected = INITIAL_DEPOSIT - WITHDRAWAL_AMOUNT;
-		
+
 		assertEquals(expected, result);
-		
+
 	}
 	
 	@Test
-	void testSubtractFromTotal_SubtractNegativeAmount_ShouldDecreaseTotal() throws InvalidAmountException {
+	@DisplayName("Should throw exception when subtracting negative amount")
+	void testSubtractFromTotalNegativeAmount() throws InvalidAmountException {
 		bank.addToTotal(INITIAL_DEPOSIT);
-			
+
 		assertThrows(InvalidAmountException.class, () -> {
 			bank.subtractFromTotal(NEGATIVE_WITHDRAWAL);
-		});	
-		
+		});
+
 	}
 	
 		
 	@Test
-	void testSubtractFromTotal_InsufficientBalance_ShouldThrowException() throws InvalidAmountException {
+	@DisplayName("Should throw exception for insufficient balance")
+	void testSubtractFromTotalInsufficientBalance() throws InvalidAmountException {
 	    // Arrange
 	    bank.addToTotal(INITIAL_DEPOSIT);
-	    	    
+
 	    // Act & Assert
 	    assertThrows(InvalidAmountException.class, () -> {
 	    	bank.subtractFromTotal(INSUFFICIENT_WITHDRAWAL);
 	    });
-	    
+
 	}
 	
 	@Test
-	void testSubtractFromTotal_SubtractZeroAmount_ShouldThrowException() throws InvalidAmountException {
+	@DisplayName("Should throw exception when subtracting zero amount")
+	void testSubtractFromTotalZeroAmount() throws InvalidAmountException {
 	    // Arrange
 	    bank.addToTotal(INITIAL_DEPOSIT);
-	    	    
+
 	    // Act & Assert
 	    assertThrows(InvalidAmountException.class, () -> {
 	    	bank.subtractFromTotal(ZERO);
 	    });
-	    
+
 	}
 	
 	
 	@Test
-	void testAddToTotal_AddVerySmallAmount_ShouldHandleFloatingPointPrecision() throws InvalidAmountException {
+	@DisplayName("Should handle floating point precision correctly")
+	void testAddToTotalSmallAmount() throws InvalidAmountException {
 	    // Testing floating-point precision with 0.1 + 0.2
 	    bank.addToTotal(SMALL_AMOUNT_1);
 	    bank.addToTotal(SMALL_AMOUNT_2);
-	    
+
 	    assertEquals(EXPECTED_SUM, bank.getTotalDeposits(), DELTA);
 	}
 
