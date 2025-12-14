@@ -20,7 +20,7 @@ public interface LoanService {
 	 * @return True if the repayment is successful, otherwise false.
 	 * @throws AccountNotFoundException if account is not found.
 	 */
-	boolean repayLoan(String accountHolder, double amount) throws AccountNotFoundException, InvalidAmountException, InvalidAccountException  ;
+	void repayLoan(String accountHolder, double amount) throws AccountNotFoundException, InvalidAmountException, InvalidAccountException  ;
 	
 	
 	/**
@@ -31,5 +31,5 @@ public interface LoanService {
 	 * @return True if the loan is approved, otherwise false.
 	 * @throws AccountNotFoundException if account is not found.
 	 */
-	boolean approveLoan(String accountHolder, double loanAmount) throws AccountNotFoundException, InvalidAmountException, InvalidAccountException ;
+	void approveLoan(String accountHolder, double loanAmount) throws AccountNotFoundException, InvalidAmountException, InvalidAccountException ;
 }

@@ -7,14 +7,22 @@ public class Account {
 	private double loan; // Outstanding loan amount
 
 	// Constructor to create a new account
-	public Account(String accountHolder, double balance) {
+	public Account(String accountHolder, double balance) throws InvalidAccountException, InvalidAmountException {
+		
+		if (accountHolder == null || accountHolder.trim().isEmpty()) {
+	        throw new InvalidAccountException("Account holder name cannot be null or empty");
+	    }
+	    if (balance < 0) {  // Maybe also validate initial balance?
+	        throw new InvalidAmountException("Initial balance cannot be negative");
+	    }
+	    
 		this.accountHolder = accountHolder;
 		this.balance = balance;
 		this.loan = 0;
 	}
 
 	// Getter for the account holder's name
-	public String getAccountHolder() {
+	public String getAccountHolder(){
 		return accountHolder;
 	}
 
@@ -48,15 +56,17 @@ public class Account {
 	}
 
 	// Method to approve a loan for the account
-	public void approveLoan(double amount) {
-		loan += amount;
+	public void approveLoan(double amount) throws InvalidAmountException {
+		if (amount <= 0) {
+	        throw new InvalidAmountException("Loan amount must be positive");
+	    }
+	    loan += amount;
 	}
 
 	// Method to repay a part of the loan (only if amount <= loan)
-	public boolean repayLoan(double amount) {
-		if (amount > loan)
-			return false; // Repayment exceeds loan
+	public void repayLoan(double amount) throws InvalidAmountException {
+		if (amount > loan || amount <= 0)
+			throw new InvalidAmountException("Repayment loan amount not valid");
 		loan -= amount;
-		return true;
 	}
 }

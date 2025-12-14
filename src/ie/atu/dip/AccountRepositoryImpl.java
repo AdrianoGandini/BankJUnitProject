@@ -15,8 +15,7 @@ public class AccountRepositoryImpl implements AccountRepository {
 	}
 
 	@Override
-	public Account findAccount(String accountHolder) 
-			throws AccountNotFoundException, InvalidAccountException {
+	public Account findAccount(String accountHolder) throws AccountNotFoundException, InvalidAccountException {
 
 		validateAccountEntry(accountHolder);
 
@@ -27,7 +26,6 @@ public class AccountRepositoryImpl implements AccountRepository {
 		}
 		throw new AccountNotFoundException(accountHolder);
 	}
-
 
 	@Override
 	public void addAccount(String accountHolder, double initialDeposit)
@@ -55,8 +53,7 @@ public class AccountRepositoryImpl implements AccountRepository {
 	 * @param accountHolder The account holder name to validate
 	 * @throws InvalidAccountException if the name is null or empty
 	 */
-	private void validateAccountEntry(String accountHolder) 
-			throws InvalidAccountException {
+	private void validateAccountEntry(String accountHolder) throws InvalidAccountException {
 
 		if (accountHolder == null || accountHolder.trim().isEmpty()) {
 			throw new InvalidAccountException("Account holder name cannot be null or empty");

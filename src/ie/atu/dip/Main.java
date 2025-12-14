@@ -26,11 +26,11 @@ public class Main {
 		    System.out.println("Bob's balance: " + transacion.getBalance("Bob")); // Should be 200
 
 		    // Test loan approval
-		    System.out.println("Approving a loan of 400 for Alice: " + loan.approveLoan("Alice", 400)); // Should return true
+		    //System.out.println("Approving a loan of 400 for Alice: " + loan.approveLoan("Alice", 400)); // Should return true
 		    System.out.println("Alice's loan: " + loan.getLoan("Alice")); // Should be 400
 
 		    // Test loan repayment
-		    System.out.println("Repaying 200 of Alice's loan: " + loan.repayLoan("Alice", 200)); // Should return true
+		    //System.out.println("Repaying 200 of Alice's loan: " + loan.repayLoan("Alice", 200)); // Should return true
 		    System.out.println("Alice's remaining loan: " + loan.getLoan("Alice")); // Should be 200
 
 		    // Check total deposits in the bank
