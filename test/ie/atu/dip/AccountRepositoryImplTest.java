@@ -25,41 +25,41 @@ class AccountRepositoryImplTest {
 	}
 	
 	@Test
-	@DisplayName("Should throw exception for zero amount")
+	@DisplayName("Should throw InvalidAmountException when adding zero amount")
 	void testAddAccountZeroAmount() {
 
 		assertThrows(InvalidAmountException.class, () -> {
 			repository.addAccount(VALID_ACCOUNT_NAME, ZERO);
 		});
 	}
-	
+
 	@Test
-	@DisplayName("Should throw exception for negative amount")
+	@DisplayName("Should throw InvalidAmountException when adding negative amount")
 	void testAddAccountNegativeAmount() {
 
 		assertThrows(InvalidAmountException.class, () -> {
 			repository.addAccount(VALID_ACCOUNT_NAME, NEGATIVE_ACCOUNT_VALUE);
 		});
 	}
-	
+
 	@Test
-	@DisplayName("Should throw exception for empty account name")
+	@DisplayName("Should throw InvalidAccountException when account name is empty")
 	void testAddAccountEmptyName() {
 		assertThrows(InvalidAccountException.class, () -> {
 			repository.addAccount(EMPTY_ACCOUNT_NAME, VALID_ACCOUNT_VALUE);
 		});
 	}
-	
+
 	@Test
-	@DisplayName("Should throw exception for null account name")
+	@DisplayName("Should throw InvalidAccountException when account name is null")
 	void testAddAccountNullName() {
 		assertThrows(InvalidAccountException.class, () -> {
 			repository.addAccount(NULL_NAME, VALID_ACCOUNT_VALUE);
 		});
 	}
-	
+
 	@Test
-	@DisplayName("Should throw exception for duplicate account")
+	@DisplayName("Should throw InvalidAccountException when account already exists")
 	void testAddAccountDuplicateAccount()
 			throws InvalidAccountException, AccountNotFoundException, InvalidAmountException {
 
@@ -85,7 +85,7 @@ class AccountRepositoryImplTest {
 	}
 	
 	@Test
-	@DisplayName("Should throw exception for non-existent account")
+	@DisplayName("Should throw AccountNotFoundException when account does not exist")
 	void testFindAccountNonExistentAccount()
 			throws InvalidAccountException, AccountNotFoundException, InvalidAmountException {
 
@@ -95,18 +95,18 @@ class AccountRepositoryImplTest {
 			repository.findAccount(INVALID_ACCOUNT_NAME);
 		});
 	}
-	
-	
+
+
 	@Test
-	@DisplayName("Should throw exception for empty name in find")
+	@DisplayName("Should throw InvalidAccountException when finding with empty name")
 	void testFindAccountEmptyName() {
 		assertThrows(InvalidAccountException.class, () -> {
 			repository.findAccount(EMPTY_ACCOUNT_NAME);
 		});
 	}
-	
+
 	@Test
-	@DisplayName("Should throw exception for null name in find")
+	@DisplayName("Should throw InvalidAccountException when finding with null name")
 	void testFindAccountNullName() {
 		assertThrows(InvalidAccountException.class, () -> {
 			repository.findAccount(NULL_NAME);

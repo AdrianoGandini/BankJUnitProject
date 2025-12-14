@@ -47,7 +47,7 @@ class BankImplTest {
 	}
 	
 	@Test
-	@DisplayName("Should throw exception when adding negative amount")
+	@DisplayName("Should throw InvalidAmountException when adding negative amount")
 	void testAddToTotalNegativeAmount() throws InvalidAmountException {
 	    assertThrows(InvalidAmountException.class, () -> {
 	    	bank.addToTotal(NEGATIVE_AMOUNT);
@@ -56,7 +56,7 @@ class BankImplTest {
 	}
 	
 	@Test
-	@DisplayName("Should throw exception when adding zero amount")
+	@DisplayName("Should throw InvalidAmountException when adding zero amount")
 	void testAddToTotalZeroAmount() throws InvalidAmountException {
 		assertThrows(InvalidAmountException.class, () -> {
 	    	bank.addToTotal(ZERO);
@@ -79,7 +79,7 @@ class BankImplTest {
 	}
 	
 	@Test
-	@DisplayName("Should throw exception when subtracting negative amount")
+	@DisplayName("Should throw InvalidAmountException when subtracting negative amount")
 	void testSubtractFromTotalNegativeAmount() throws InvalidAmountException {
 		bank.addToTotal(INITIAL_DEPOSIT);
 
@@ -91,7 +91,7 @@ class BankImplTest {
 	
 		
 	@Test
-	@DisplayName("Should throw exception for insufficient balance")
+	@DisplayName("Should throw InvalidAmountException when balance is insufficient")
 	void testSubtractFromTotalInsufficientBalance() throws InvalidAmountException {
 	    // Arrange
 	    bank.addToTotal(INITIAL_DEPOSIT);
@@ -104,7 +104,7 @@ class BankImplTest {
 	}
 	
 	@Test
-	@DisplayName("Should throw exception when subtracting zero amount")
+	@DisplayName("Should throw InvalidAmountException when subtracting zero amount")
 	void testSubtractFromTotalZeroAmount() throws InvalidAmountException {
 	    // Arrange
 	    bank.addToTotal(INITIAL_DEPOSIT);

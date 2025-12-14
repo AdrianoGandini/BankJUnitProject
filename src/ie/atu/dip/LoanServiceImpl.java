@@ -11,10 +11,10 @@ public class LoanServiceImpl implements LoanService {
 	}
 
 	@Override
-	public Double getLoan(String accountHolder) throws AccountNotFoundException, InvalidAccountException {
+	public double getLoan(String accountHolder) throws AccountNotFoundException, InvalidAccountException {
 
 		Account account = manager.findAccount(accountHolder);
-		return account != null ? account.getLoan() : null;
+		return account.getLoan();
 	}
 
 	@Override

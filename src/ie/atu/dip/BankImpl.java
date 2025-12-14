@@ -33,7 +33,7 @@ public class BankImpl implements Bank {
 		
 		//Check if the balance is sufficient.
 		if (amount > totalDeposits || amount <= 0) {
-			throw new InvalidAmountException("Transaction failed: insufficient balance or invalid withdrawal amount.");			
+			throw new InvalidAmountException("Insufficient Bank balance or invalid withdrawal amount.");			
 				
 		}
 		totalDeposits -= amount;

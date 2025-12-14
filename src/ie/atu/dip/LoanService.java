@@ -9,7 +9,7 @@ public interface LoanService {
 	 * @return The loan amount if the account exists, otherwise null.
 	 * @throws AccountNotFoundException if account is not found.
 	 */
-	Double getLoan(String accountHolder) throws AccountNotFoundException, InvalidAccountException ;
+	double getLoan(String accountHolder) throws AccountNotFoundException, InvalidAccountException ;
 	
 	
 	/**

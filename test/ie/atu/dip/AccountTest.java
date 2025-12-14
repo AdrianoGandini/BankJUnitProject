@@ -23,6 +23,7 @@ class AccountTest {
 
 	private static final double VALID_LOAN_VALUE = 100;
 	private static final double INVALID_REPAY_VALUE = 1000;
+	private static final double PARTIAL_REPAY_VALUE = 50;
 
 	private Account account;
 
@@ -71,7 +72,7 @@ class AccountTest {
 
 	@Test
 	@DisplayName("Should reject deposit for negative amount")
-	void testDepositNegativeAmount() throws InvalidAccountException, InvalidAmountException {
+	void testDepositNegativeAmount() {
 		assertThrows(InvalidAmountException.class, () -> {
 			account.deposit(NEGATIVE_VALUE);
 		});
@@ -79,7 +80,7 @@ class AccountTest {
 
 	@Test
 	@DisplayName("Should reject deposit for zero amount")
-	void testDepositZeroAmount() throws InvalidAccountException, InvalidAmountException {
+	void testDepositZeroAmount() {
 		assertThrows(InvalidAmountException.class, () -> {
 			account.deposit(ZERO);
 		});
@@ -97,7 +98,7 @@ class AccountTest {
 
 	@Test
 	@DisplayName("Should reject withdrawal exceeding balance")
-	void testWithdrawInsufficientFunds() throws InvalidAccountException, InvalidAmountException {
+	void testWithdrawInsufficientFunds() {
 		assertThrows(InvalidAmountException.class, () -> {
 			account.withdraw(WITHDRAW_VALUE_EXCESS);
 		});
@@ -181,14 +182,11 @@ class AccountTest {
 	@Test
 	@DisplayName("Should successfully pay loan for valid amount")
 	void testReapyLoanValidAmount() throws InvalidAmountException {
-		double initialBalance = account.getLoan();
-		
-		account.approveLoan(VALID_LOAN_VALUE);
-		account.repayLoan(VALID_VALUE);
-		
-		double afterPayBalance = account.getLoan();
-		
-		assertEquals(initialBalance, afterPayBalance);
+		account.approveLoan(VALID_LOAN_VALUE);  
+	    
+	    account.repayLoan(PARTIAL_REPAY_VALUE);               
+	    
+	    assertEquals(PARTIAL_REPAY_VALUE, account.getLoan());
 	}
 
 }
