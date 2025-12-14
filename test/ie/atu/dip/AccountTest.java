@@ -2,10 +2,14 @@ package ie.atu.dip;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
+@Timeout(value = 2, unit = TimeUnit.SECONDS) 
 class AccountTest {
 
 	private static final String VALID_ACCOUNT_NAME = "Adriano Gandini";
